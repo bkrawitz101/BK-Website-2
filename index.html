@@ -3,12 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brian Krawitz - Imagineer | Community Instigator | MetaConnector</title>
+    <title>Brian Krawitz - Creative Technology Evangelist</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+
 </head>
 <body>
+
+    <!-- Video Intro Overlay -->
+    <div id="videoIntro" class="video-intro">
+        <video id="introVideo" class="intro-video" autoplay muted>
+            <source src="Retro_Futuristic_City_Sunrise_Video.mp4" type="video/mp4">
+            Your browser does not support the video element.
+        </video>
+        <div class="video-overlay">
+            <div class="intro-content">
+                <h1 class="intro-title">Brian Krawitz</h1>
+                <p class="intro-subtitle">Creative Technology Evangelist</p>
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Audio -->
+    <audio id="backgroundAudio" loop preload="auto">
+        <source src="Alien Worlds - Retro Sci-Fi Soundscapes and Effects.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <!-- Audio Control Button -->
+    <div id="audioControl" class="audio-control">
+        <button id="playAudioBtn" class="audio-btn">
+            <i class="fas fa-volume-mute"></i>
+            <span>Enable Audio</span>
+        </button>
+    </div>
+
+    <!-- Container with Enhanced Visibility -->
     <div class="container">
         <!-- 2001: A Space Odyssey Monolith Effect -->
         <div class="monolith-container">
@@ -26,22 +61,7 @@
                     </div>
                     <div class="header-text">
                         <h1 class="name">Brian Krawitz</h1>
-                        <p class="title">Imagineer | Community Instigator | MetaConnector</p>
-                        <p class="subtitle">Transmedia Visionary | Transformational Futurist | Creative Technology Evangelist</p>
-                    </div>
-                </div>
-                <div class="contact-brief">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>bkrawitz@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>(510) 759-1982</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <span>LinkedIn</span>
+                        <p class="title">Imagineer | Community Instigator | MetaConnector | Transmedia Visionary | Transformational Futurist | Creative Technology Evangelist</p>
                     </div>
                 </div>
             </div>
@@ -85,14 +105,20 @@
                 </div>
                 
                 <div class="about-content">
-                    <div class="mission-statement">
-                        <div class="hal-voice">
-                            <span class="hal-text">"I'm sorry, Dave. I'm afraid I can't do that."</span>
-                            <span class="hal-text">"I know I've made some very poor decisions recently, but I can give you my complete assurance that my work will be back to normal."</span>
+                    <div class="mission-statement clickable-entry" data-content="Once unlocked, the power of imagination can manifest anything. I have taken my life's worth of multidisciplinary experience and woven it into who I am now, an Imagineer, Community Instigator, MetaConnector, Transmedia Visionary, Transformational Futurist, and Creative Technology Evangelist.  My noble purpose as defined by who I am, what I do, and why I do it is to bridge the gap between imagination and reality, within the physical and virtual worlds. I see things from a unique viewpoint, which enables me to start with a dream and help unlock its potential. I look forward to joining you on your journey…">
+                        <div class="entry-header">
+                            <h3 class="entry-title">Mission Statement</h3>
+                            <div class="click-indicator">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
                         </div>
-                        <p class="mission-text">
-                            Once unlocked, the power of imagination can manifest anything. I have taken my life's worth of multidisciplinary experience and woven it into who I am now, an Imagineer, Community Instigator, Poetic Philosopher, Meta-Connector and Creative Technology. My noble purpose as defined by who I am and why I am here is to bridge the gap between imagination and reality, within the physical and virtual worlds. I see things from a unique viewpoint, which enables me to start with a dream and help unlock its potential. I look forward to joining you on your journey…
-                        </p>
+                        <div class="entry-content">
+                            <div class="hal-voice">
+                                <span class="hal-text">"I'm sorry, Dave. I'm afraid I can't do that."</span>
+                                <span class="hal-text">"I know I've made some very poor decisions recently, but I can give you my complete assurance that my work will be back to normal."</span>
+                            </div>
+                            <p class="mission-text typing-text"></p>
+                        </div>
                     </div>
                     
                     <div class="photo-gallery">
@@ -124,39 +150,67 @@
                     <div class="timeline-category">
                         <h3 class="category-title">Current Roles</h3>
                         <div class="experience-cards">
-                            <div class="experience-card featured">
-                                <div class="card-header">
+                            <div class="experience-card featured clickable-entry" data-content="Creative Co-director at P.e.a.c.e !ng (People Evolve as Consciousness Expands) | Jun 2025 – Present. Co-director of creative initiatives, curating immersive 'Experibitions' that merge art with formalized consciousness studies, integrating science and experiential design.">
+                                <div class="entry-header">
                                     <h4>Creative Co-director</h4>
                                     <span class="company">P.e.a.c.e !ng (People Evolve as Consciousness Expands)</span>
                                     <span class="period">Jun 2025 – Present</span>
+                                    <div class="click-indicator">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
                                 </div>
-                                <p>Co-director of creative initiatives, curating immersive "Experibitions" that merge art with formalized consciousness studies, integrating science and experiential design.</p>
-                                <div class="project-links">
-                                    <a href="https://peacemuseum.wixsite.com/aethernautworks" target="_blank" class="project-link">Visit P.E.A.C.E</a>
+                                <div class="entry-content">
+                                    <ul class="experience-bullets">
+                                        <li>Co-director of creative initiatives, curating immersive "Experibitions" that merge art with formalized consciousness studies</li>
+                                        <li>Integrating science and experiential design</li>
+                                    </ul>
+                                    <div class="project-links">
+                                        <a href="https://peacemuseum.wixsite.com/aethernautworks" target="_blank" class="project-link">Visit P.E.A.C.E</a>
+                                    </div>
                                 </div>
                             </div>
                             
-                            <div class="experience-card featured">
-                                <div class="card-header">
+                            <div class="experience-card featured clickable-entry" data-content="Creative Technology Evangelist at H.A.L.O. Qi (Hyperqube Algorithmic Language Oracle) | Jun 2025 – Present. Collaborate with principal scientific investigator to develop data visualization tools for hyper-dimensional computations in a neuromorphic quantum computing environment. Support global outreach and creative presentation of hyper-dimensional AI research, bridging artists, scientists, and technologists in participatory consciousness experiments. Identify and cultivate partnerships with projects aligned to the United Nations Sustainable Development Goals (UN SDGs), expanding the network of regenerative and socially impactful initiatives.">
+                                <div class="entry-header">
                                     <h4>Creative Technology Evangelist</h4>
                                     <span class="company">H.A.L.O. Qi (Hyperqube Algorithmic Language Oracle)</span>
                                     <span class="period">Jun 2025 – Present</span>
+                                    <div class="click-indicator">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
                                 </div>
-                                <p>Collaborate with principal scientific investigator to develop data visualization tools for hyper-dimensional computations in a neuromorphic quantum computing environment. Support global outreach and creative presentation of hyper-dimensional AI research, bridging artists, scientists, and technologists in participatory consciousness experiments. Identify and cultivate partnerships with projects aligned to the United Nations Sustainable Development Goals (UN SDGs), expanding the network of regenerative and socially impactful initiatives.</p>
-                                <div class="project-links">
-                                    <a href="https://www.halo-ai.org/" target="_blank" class="project-link">Visit H.A.L.O</a>
+                                <div class="entry-content">
+                                    <ul class="experience-bullets">
+                                        <li>Collaborate with principal scientific investigator to develop data visualization tools for hyper-dimensional computations in a neuromorphic quantum computing environment</li>
+                                        <li>Support global outreach and creative presentation of hyper-dimensional AI research, bridging artists, scientists, and technologists in participatory consciousness experiments</li>
+                                        <li>Identify and cultivate partnerships with projects aligned to the United Nations Sustainable Development Goals (UN SDGs), expanding the network of regenerative and socially impactful initiatives</li>
+                                    </ul>
+                                    <div class="project-links">
+                                        <a href="https://www.halo-ai.org/" target="_blank" class="project-link">Visit H.A.L.O</a>
+                                    </div>
                                 </div>
                             </div>
                             
-                            <div class="experience-card featured">
-                                <div class="card-header">
+                            <div class="experience-card featured clickable-entry" data-content="Creative Technology Evangelist and Community Instigator at AVN (Agriculture Value-Chain Network) | Nov 2024 - Present. Community Development & Engagement: Cultivating grassroots initiatives and forging strong networks within farmer cooperatives, agribusinesses, and sustainability-driven communities to co-develop regenerative solutions. Innovative Communication & Collaboration: Leveraging unique storytelling and transmedia strategies to align diverse stakeholders, ensuring seamless integration of technology and sustainable practices. Technology Integration & Open-Source Ideation: Advising the core technology team to co-create and implement open-source tools that enhance agricultural systems, optimize waste stream upcycling, and strengthen cooperative ecosystems. Hands-On Implementation & Fieldwork: Serving as a boots-on-the-ground leader in the Sacramento area, actively developing and deploying community-driven solutions that translate regenerative concepts into tangible impact. Sustainability & Circular Economy Innovation: Co-creating ecosystems for waste stream upcycling and supporting cooperative models that promote regenerative practices, resource efficiency, and community empowerment.">
+                                <div class="entry-header">
                                     <h4>Creative Technology Evangelist | Community Instigator</h4>
                                     <span class="company">AVN (Agriculture Value-Chain Network)</span>
                                     <span class="period">Nov 2024 - Present</span>
+                                    <div class="click-indicator">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
                                 </div>
-                                <p>Community Development & Engagement: Cultivating grassroots initiatives and forging strong networks within farmer cooperatives, agribusinesses, and sustainability-driven communities to co-develop regenerative solutions. Innovative Communication & Collaboration: Leveraging unique storytelling and transmedia strategies to align diverse stakeholders, ensuring seamless integration of technology and sustainable practices. Technology Integration & Open-Source Ideation: Advising the core technology team to co-create and implement open-source tools that enhance agricultural systems, optimize waste stream upcycling, and strengthen cooperative ecosystems. Hands-On Implementation & Fieldwork: Serving as a boots-on-the-ground leader in the Sacramento area, actively developing and deploying community-driven solutions that translate regenerative concepts into tangible impact. Sustainability & Circular Economy Innovation: Co-creating ecosystems for waste stream upcycling and supporting cooperative models that promote regenerative practices, resource efficiency, and community empowerment.</p>
-                                <div class="project-links">
-                                    <a href="https://steady-bombolone-aec41f.netlify.app/" target="_blank" class="project-link">Visit AVN</a>
+                                <div class="entry-content">
+                                    <ul class="experience-bullets">
+                                        <li><strong>Community Development & Engagement:</strong> Cultivating grassroots initiatives and forging strong networks within farmer cooperatives, agribusinesses, and sustainability-driven communities to co-develop regenerative solutions</li>
+                                        <li><strong>Innovative Communication & Collaboration:</strong> Leveraging unique storytelling and transmedia strategies to align diverse stakeholders, ensuring seamless integration of technology and sustainable practices</li>
+                                        <li><strong>Technology Integration & Open-Source Ideation:</strong> Advising the core technology team to co-create and implement open-source tools that enhance agricultural systems, optimize waste stream upcycling, and strengthen cooperative ecosystems</li>
+                                        <li><strong>Hands-On Implementation & Fieldwork:</strong> Serving as a boots-on-the-ground leader in the Sacramento area, actively developing and deploying community-driven solutions that translate regenerative concepts into tangible impact</li>
+                                        <li><strong>Sustainability & Circular Economy Innovation:</strong> Co-creating ecosystems for waste stream upcycling and supporting cooperative models that promote regenerative practices, resource efficiency, and community empowerment</li>
+                                    </ul>
+                                    <div class="project-links">
+                                        <a href="https://steady-bombolone-aec41f.netlify.app/" target="_blank" class="project-link">Visit AVN</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -166,27 +220,52 @@
                     <div class="timeline-category">
                         <h3 class="category-title">Advisory Roles</h3>
                         <div class="experience-cards">
-                            <div class="experience-card">
-                                <div class="card-header">
+                            <div class="experience-card clickable-entry" data-content="Advisory Board Member and Creative Technology Evangelist at IDA (Invictus Development Africa) | Nov 2024 - May 2025. Provide strategic guidance as Creative Technology Evangelist to drive IDA's mission of empowering communities through regenerative agriculture, renewable energy, and technology-driven livelihoods. Advise on the integration of cutting-edge technologies such as blockchain and AI to enhance transparency, efficiency, and social impact across sustainable ventures. Support the development and scaling of circular economic models and resource management initiatives to foster environmental stewardship. Collaborate with global stakeholders, including investors, NGOs, and development agencies, to promote scalable, equitable, and sustainable ecosystems. Contribute expertise to training and capacity-building programs, focusing on skills development, digital literacy, and entrepreneurship for marginalized communities.">
+                                <div class="entry-header">
                                     <h4>Advisory Board Member, Creative Technology Evangelist</h4>
                                     <span class="company">IDA (Invictus Development Africa)</span>
                                     <span class="period">Nov 2024 - May 2025</span>
+                                    <div class="click-indicator">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
                                 </div>
-                                <p>Provide strategic guidance as Creative Technology Evangelist to drive IDA's mission of empowering communities through regenerative agriculture, renewable energy, and technology-driven livelihoods. Advise on the integration of cutting-edge technologies such as blockchain and AI to enhance transparency, efficiency, and social impact across sustainable ventures. Support the development and scaling of circular economic models and resource management initiatives to foster environmental stewardship. Collaborate with global stakeholders, including investors, NGOs, and development agencies, to promote scalable, equitable, and sustainable ecosystems. Contribute expertise to training and capacity-building programs, focusing on skills development, digital literacy, and entrepreneurship for marginalized communities.</p>
-                                <div class="project-links">
-                                    <a href="https://www.linkedin.com/company/104164397/admin/dashboard/" target="_blank" class="project-link">Visit IDA</a>
+                                <div class="entry-content">
+                                    <ul class="experience-bullets">
+                                        <li>Provide strategic guidance as Creative Technology Evangelist to drive IDA's mission of empowering communities through regenerative agriculture, renewable energy, and technology-driven livelihoods</li>
+                                        <li>Advise on the integration of cutting-edge technologies such as blockchain and AI to enhance transparency, efficiency, and social impact across sustainable ventures</li>
+                                        <li>Support the development and scaling of circular economic models and resource management initiatives to foster environmental stewardship</li>
+                                        <li>Collaborate with global stakeholders, including investors, NGOs, and development agencies, to promote scalable, equitable, and sustainable ecosystems</li>
+                                        <li>Contribute expertise to training and capacity-building programs, focusing on skills development, digital literacy, and entrepreneurship for marginalized communities</li>
+                                    </ul>
+                                    <div class="project-links">
+                                        <a href="https://www.linkedin.com/company/104164397/admin/dashboard/" target="_blank" class="project-link">Visit IDA</a>
+                                    </div>
                                 </div>
                             </div>
                             
-                            <div class="experience-card">
-                                <div class="card-header">
+                            <div class="experience-card clickable-entry" data-content="Creative Technology Evangelist at APCCC (Africa Partnership On Climate Control Coalition) | Jun 2024 - Present. Champion world-building as a tool for collaborative eco-village design, transforming visionary concepts into sustainable living spaces. Lead development of Edward's Hamlet Regenerative Agriculture Education Center, utilizing VR for community visualization and co-creation. Foster collaboration through immersive workshops and design sessions, blending creative imagination with practical, sustainable development. Harness VR and emerging technologies to help communities visualize and create sustainable futures. Bridge technology with community-driven solutions, empowering people to co-create eco-villages reflecting traditional values and modern innovations. Engage diverse stakeholders to bring cutting-edge solutions to rural communities, enabling participatory community building. Lead workshops teaching community members to utilize technology for empowerment and active participation in shaping living environments. Promote innovation through digital storytelling, VR environments, and interactive design, fostering community ownership and pride.">
+                                <div class="entry-header">
                                     <h4>Creative Technology Evangelist</h4>
                                     <span class="company">APCCC (Africa Partnership On Climate Control Coalition)</span>
                                     <span class="period">Jun 2024 - Present</span>
+                                    <div class="click-indicator">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
                                 </div>
-                                <p>Champion world-building as a tool for collaborative eco-village design, transforming visionary concepts into sustainable living spaces. Lead development of Edward's Hamlet Regenerative Agriculture Education Center, utilizing VR for community visualization and co-creation. Foster collaboration through immersive workshops and design sessions, blending creative imagination with practical, sustainable development. Harness VR and emerging technologies to help communities visualize and create sustainable futures. Bridge technology with community-driven solutions, empowering people to co-create eco-villages reflecting traditional values and modern innovations. Engage diverse stakeholders to bring cutting-edge solutions to rural communities, enabling participatory community building. Lead workshops teaching community members to utilize technology for empowerment and active participation in shaping living environments. Promote innovation through digital storytelling, VR environments, and interactive design, fostering community ownership and pride.</p>
-                                <div class="project-links">
-                                    <a href="https://www.linkedin.com/company/104164397/admin/dashboard/" target="_blank" class="project-link">Visit APCCC</a>
+                                <div class="entry-content">
+                                    <ul class="experience-bullets">
+                                        <li>Champion world-building as a tool for collaborative eco-village design, transforming visionary concepts into sustainable living spaces</li>
+                                        <li>Lead development of Edward's Hamlet Regenerative Agriculture Education Center, utilizing VR for community visualization and co-creation</li>
+                                        <li>Foster collaboration through immersive workshops and design sessions, blending creative imagination with practical, sustainable development</li>
+                                        <li>Harness VR and emerging technologies to help communities visualize and create sustainable futures</li>
+                                        <li>Bridge technology with community-driven solutions, empowering people to co-create eco-villages reflecting traditional values and modern innovations</li>
+                                        <li>Engage diverse stakeholders to bring cutting-edge solutions to rural communities, enabling participatory community building</li>
+                                        <li>Lead workshops teaching community members to utilize technology for empowerment and active participation in shaping living environments</li>
+                                        <li>Promote innovation through digital storytelling, VR environments, and interactive design, fostering community ownership and pride</li>
+                                    </ul>
+                                    <div class="project-links">
+                                        <a href="https://www.linkedin.com/company/104164397/admin/dashboard/" target="_blank" class="project-link">Visit APCCC</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -198,31 +277,66 @@
                     <div class="timeline-category">
                         <h3 class="category-title">Technical Experience</h3>
                         <div class="experience-cards">
-                            <div class="experience-card">
-                                <div class="card-header">
+                            <div class="experience-card clickable-entry" data-content="Event Production at Local 16 | Nov 2019 - Present. Performed audio/visual set up and breakdown for SF Bay Area trade shows and conventions. Support one-off events as Webcast Streaming engineer. Works as audio operator including A1 and A2 on roster. Serves as Video Utility for $100M + large event configurations.">
+                                <div class="entry-header">
                                     <h4>Event Production</h4>
                                     <span class="company">Local 16</span>
                                     <span class="period">Nov 2019 - Present</span>
+                                    <div class="click-indicator">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
                                 </div>
-                                <p>Performed audio/visual set up and breakdown for SF Bay Area trade shows and conventions. Support one-off events as Webcast Streaming engineer. Works as audio operator including A1 and A2 on roster. Serves as Video Utility for $100M + large event configurations.</p>
+                                <div class="entry-content">
+                                    <ul class="experience-bullets">
+                                        <li>Performed audio/visual set up and breakdown for SF Bay Area trade shows and conventions</li>
+                                        <li>Support one-off events as Webcast Streaming engineer</li>
+                                        <li>Works as audio operator including A1 and A2 on roster</li>
+                                        <li>Serves as Video Utility for $100M + large event configurations</li>
+                                    </ul>
+                                </div>
                             </div>
                             
-                            <div class="experience-card">
-                                <div class="card-header">
+                            <div class="experience-card clickable-entry" data-content="Senior Signal Acquisitions Engineer at ON24 | Jul 2011 - Sept 2017. Led complex end client setups various media environments. Configured complex client webcasts workflows. Setup and configuration of broadcast quality webcasting infrastructure. Served as full client support on all webcasting issues, including off hour on-call 24x5 client-side support. Coproduced the design and functionality on one remote office and 2 remote data centers.">
+                                <div class="entry-header">
                                     <h4>Senior Signal Acquisitions Engineer</h4>
                                     <span class="company">ON24</span>
                                     <span class="period">Jul 2011 - Sept 2017</span>
+                                    <div class="click-indicator">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
                                 </div>
-                                <p>Led complex end client setups various media environments. Configured complex client webcasts workflows. Setup and configuration of broadcast quality webcasting infrastructure. Served as full client support on all webcasting issues, including off hour on-call 24x5 client-side support. Coproduced the design and functionality on one remote office and 2 remote data centers.</p>
+                                <div class="entry-content">
+                                    <ul class="experience-bullets">
+                                        <li>Led complex end client setups various media environments</li>
+                                        <li>Configured complex client webcasts workflows</li>
+                                        <li>Setup and configuration of broadcast quality webcasting infrastructure</li>
+                                        <li>Served as full client support on all webcasting issues, including off hour on-call 24x5 client-side support</li>
+                                        <li>Coproduced the design and functionality on one remote office and 2 remote data centers</li>
+                                    </ul>
+                                </div>
                             </div>
                             
-                            <div class="experience-card">
-                                <div class="card-header">
+                            <div class="experience-card clickable-entry" data-content="Manager, Broadcast Engineering at Current TV | Apr 2006 - Feb 2010. Collaborated on the launch of the first international TV Station, an Al Gore initiative. Managed the first 8 months of the onsite technical department start-up operations in London, UK. Served as On-Air support for Master Control, supporting 3 separate channels, including UK and Italy. Maintained broadcast workflow and servers in both Windows and Mac OS. Supported multiple baseband and digital video formats with the Ingest department. Undertook Engineer-in-Charge duties for multi-country live simulcast production. Teamed up with the Research and Development department to launch the Twitter and live TV integration. Administered support for all company multi-media conference rooms.">
+                                <div class="entry-header">
                                     <h4>Manager, Broadcast Engineering</h4>
                                     <span class="company">Current TV</span>
                                     <span class="period">Apr 2006 - Feb 2010</span>
+                                    <div class="click-indicator">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
                                 </div>
-                                <p>Collaborated on the launch of the first international TV Station, an Al Gore initiative. Managed the first 8 months of the onsite technical department start-up operations in London, UK. Served as On-Air support for Master Control, supporting 3 separate channels, including UK and Italy. Maintained broadcast workflow and servers in both Windows and Mac OS. Supported multiple baseband and digital video formats with the Ingest department. Undertook Engineer-in-Charge duties for multi-country live simulcast production. Teamed up with the Research and Development department to launch the Twitter and live TV integration. Administered support for all company multi-media conference rooms.</p>
+                                <div class="entry-content">
+                                    <ul class="experience-bullets">
+                                        <li>Collaborated on the launch of the first international TV Station, an Al Gore initiative</li>
+                                        <li>Managed the first 8 months of the onsite technical department start-up operations in London, UK</li>
+                                        <li>Served as On-Air support for Master Control, supporting 3 separate channels, including UK and Italy</li>
+                                        <li>Maintained broadcast workflow and servers in both Windows and Mac OS</li>
+                                        <li>Supported multiple baseband and digital video formats with the Ingest department</li>
+                                        <li>Undertook Engineer-in-Charge duties for multi-country live simulcast production</li>
+                                        <li>Teamed up with the Research and Development department to launch the Twitter and live TV integration</li>
+                                        <li>Administered support for all company multi-media conference rooms</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -231,13 +345,22 @@
                     <div class="timeline-category">
                         <h3 class="category-title">Prior Work Experience</h3>
                         <div class="experience-cards">
-                            <div class="experience-card">
-                                <div class="card-header">
+                            <div class="experience-card clickable-entry" data-content="Various Technical Roles at Multiple Companies | 2000 - 2006. Larry Flynt Publications, Los Angeles, CA: Supervisor, Broadcast Video on Demand/Quality Control. E! Networks, Los Angeles, CA: Tape Operations / Transmissions. Bloomberg LP, New York, NY: Television Operator.">
+                                <div class="entry-header">
                                     <h4>Various Technical Roles</h4>
                                     <span class="company">Multiple Companies</span>
                                     <span class="period">2000 - 2006</span>
+                                    <div class="click-indicator">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
                                 </div>
-                                <p>Larry Flynt Publications, Los Angeles, CA - Supervisor, Broadcast Video on Demand/Quality Control. E! Networks, Los Angeles, CA - Tape Operations / Transmissions. Bloomberg LP, New York, NY - Television Operator.</p>
+                                <div class="entry-content">
+                                    <ul class="experience-bullets">
+                                        <li><strong>Larry Flynt Publications, Los Angeles, CA:</strong> Supervisor, Broadcast Video on Demand/Quality Control</li>
+                                        <li><strong>E! Networks, Los Angeles, CA:</strong> Tape Operations / Transmissions</li>
+                                        <li><strong>Bloomberg LP, New York, NY:</strong> Television Operator</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -263,11 +386,11 @@
                                     <span class="year">2023</span>
                                 </div>
                                 <p>Immersive and interactive virtual reality experience, based in Spatial, inspired by connecting and educating communities in sustainable and regenerative practices.</p>
-                                <div class="project-details">
-                                    <p><strong>Lead Unity Developer</strong>, including layout and programming</p>
-                                    <p><strong>Assisted in 3D modeling</strong>, including editing in Fusion 360 and Blender</p>
-                                    <p><strong>Education ideation and integration</strong> within virtual space.</p>
-                                </div>
+                                <ul class="project-bullets">
+                                    <li><strong>Lead Unity Developer</strong>, including layout and programming</li>
+                                    <li><strong>Assisted in 3D modeling</strong>, including editing in Fusion 360 and Blender</li>
+                                    <li><strong>Education ideation and integration</strong> within virtual space</li>
+                                </ul>
                                 <div class="project-links">
                                     <a href="https://www.spatial.io/s/Heartland-VR-99-64a48527f9bd5d584cddf40d?share=0" target="_blank" class="project-link">View Project</a>
                                 </div>
@@ -279,12 +402,12 @@
                                     <span class="year">2020</span>
                                 </div>
                                 <p>Immersive and interactive virtual reality experience, previously based in Altspace, inspired by connecting community through artistic expression and biofeedback.</p>
-                                <div class="project-details">
-                                    <p><strong>Ideated and concept design</strong> of immersive floating islands in space</p>
-                                    <p><strong>3D modeling of sacred geometry</strong>, including editing in Fusion 360 and Blender</p>
-                                    <p><strong>Universe environment layout and interaction</strong> for Altspace, built within Unity game engine.</p>
-                                    <p><strong>Storyline and superhero character development</strong></p>
-                                </div>
+                                <ul class="project-bullets">
+                                    <li><strong>Ideated and concept design</strong> of immersive floating islands in space</li>
+                                    <li><strong>3D modeling of sacred geometry</strong>, including editing in Fusion 360 and Blender</li>
+                                    <li><strong>Universe environment layout and interaction</strong> for Altspace, built within Unity game engine</li>
+                                    <li><strong>Storyline and superhero character development</strong></li>
+                                </ul>
                                 <div class="project-links">
                                     <a href="https://whitemirror.live/video-white-mirror-vr-trailer.html" target="_blank" class="project-link">VR Trailer</a>
                                 </div>
@@ -377,13 +500,13 @@
                                     <span class="year">2013</span>
                                 </div>
                                 <p>Mixed medium acrylic, metal, fire and interactive cognitive lightning sculpture.</p>
-                                <div class="project-details">
-                                    <p><strong>Lead Lighting Artist</strong></p>
-                                    <p>Ideated and designed custom lighting sculpture inspired by brain neurons and axons</p>
-                                    <p>Developed core concept of lighting sequence to give the feel of brain activity</p>
-                                    <p>Led a team of 10 volunteers to build over 200 lighting fixtures</p>
-                                    <p>Served as build lead for final assembly on playa</p>
-                                </div>
+                                <ul class="project-bullets">
+                                    <li><strong>Lead Lighting Artist</strong></li>
+                                    <li>Ideated and designed custom lighting sculpture inspired by brain neurons and axons</li>
+                                    <li>Developed core concept of lighting sequence to give the feel of brain activity</li>
+                                    <li>Led a team of 10 volunteers to build over 200 lighting fixtures</li>
+                                    <li>Served as build lead for final assembly on playa</li>
+                                </ul>
                                 <div class="project-links">
                                     <a href="https://www.huffpost.com/entry/burning-man-brain_n_3599319" target="_blank" class="project-link">View Project</a>
                                 </div>
@@ -395,12 +518,12 @@
                                     <span class="year">2012</span>
                                 </div>
                                 <p>Mixed medium wood, and interactive lighting sculpture.</p>
-                                <div class="project-details">
-                                    <p><strong>Lead Lighting Artist</strong></p>
-                                    <p>Designed custom lighting fixtures for both phases of Zoa, inspired by sea creatures</p>
-                                    <p>Assisted with concept of lighting sequence to give the feel of organic breath in the sculpture</p>
-                                    <p>Led a team of 10 volunteers to build over 100 lighting fixtures</p>
-                                </div>
+                                <ul class="project-bullets">
+                                    <li><strong>Lead Lighting Artist</strong></li>
+                                    <li>Designed custom lighting fixtures for both phases of Zoa, inspired by sea creatures</li>
+                                    <li>Assisted with concept of lighting sequence to give the feel of organic breath in the sculpture</li>
+                                    <li>Led a team of 10 volunteers to build over 100 lighting fixtures</li>
+                                </ul>
                                 <div class="project-links">
                                     <a href="https://www.fluxfoundation.org/zoa/" target="_blank" class="project-link">View Project</a>
                                 </div>
@@ -412,12 +535,12 @@
                                     <span class="year">2011</span>
                                 </div>
                                 <p>Mixed medium steel, LEDs, fire and nylon interactive umbrella-like sculpture.</p>
-                                <div class="project-details">
-                                    <p><strong>Project Lead</strong></p>
-                                    <p>Key in design of the 'jig' or form to build all of the metal fixtures</p>
-                                    <p>Managed general shop/warehouse logistics, including inventory, floor layouts and use of forklift</p>
-                                    <p>Served as an onsite advisor in the final assembly</p>
-                                </div>
+                                <ul class="project-bullets">
+                                    <li><strong>Project Lead</strong></li>
+                                    <li>Key in design of the 'jig' or form to build all of the metal fixtures</li>
+                                    <li>Managed general shop/warehouse logistics, including inventory, floor layouts and use of forklift</li>
+                                    <li>Served as an onsite advisor in the final assembly</li>
+                                </ul>
                                 <div class="project-links">
                                     <a href="https://www.fluxfoundation.org/brollyflock/" target="_blank" class="project-link">View Project</a>
                                 </div>
@@ -429,13 +552,13 @@
                                     <span class="year">2010</span>
                                 </div>
                                 <p>Wood and lighting sculpture.</p>
-                                <div class="project-details">
-                                    <p><strong>Project Lead</strong></p>
-                                    <p>Worked with a team of artists to design the outside surface for a 21,000 square foot sculpture</p>
-                                    <p>Developed a process to produce modular sections for this project called 'thatches'</p>
-                                    <p>Led a team of 30+ volunteers to build over 700 thatches</p>
-                                    <p>Managed general shop/warehouse logistics, including inventory, floor layouts and use of forklift</p>
-                                </div>
+                                <ul class="project-bullets">
+                                    <li><strong>Project Lead</strong></li>
+                                    <li>Worked with a team of artists to design the outside surface for a 21,000 square foot sculpture</li>
+                                    <li>Developed a process to produce modular sections for this project called 'thatches'</li>
+                                    <li>Led a team of 30+ volunteers to build over 700 thatches</li>
+                                    <li>Managed general shop/warehouse logistics, including inventory, floor layouts and use of forklift</li>
+                                </ul>
                                 <div class="project-links">
                                     <a href="https://www.fluxfoundation.org/temple-of-flux/" target="_blank" class="project-link">View Project</a>
                                 </div>

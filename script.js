@@ -1,3 +1,140 @@
+// Background audio functionality
+function initBackgroundAudio() {
+    const backgroundAudio = document.getElementById('backgroundAudio');
+    const audioBtn = document.getElementById('playAudioBtn');
+    
+    if (backgroundAudio && audioBtn) {
+        // Set volume to a subtle level
+        backgroundAudio.volume = 0.3;
+        
+        // Ensure audio loops
+        backgroundAudio.loop = true;
+        
+        // Audio control button functionality
+        audioBtn.addEventListener('click', function() {
+            if (backgroundAudio.paused) {
+                // Start playing
+                backgroundAudio.play().then(() => {
+                    audioBtn.innerHTML = '<i class="fas fa-volume-up"></i><span>Audio On</span>';
+                    audioBtn.classList.add('playing');
+                    console.log('🎵 Background audio started');
+                }).catch(function(error) {
+                    console.log('Background audio play failed:', error);
+                });
+            } else {
+                // Pause playing
+                backgroundAudio.pause();
+                audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i><span>Enable Audio</span>';
+                audioBtn.classList.remove('playing');
+                console.log('🔇 Background audio paused');
+            }
+        });
+        
+        // Try to play audio on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Try to play audio (may be blocked by browser autoplay policy)
+            backgroundAudio.play().then(() => {
+                audioBtn.innerHTML = '<i class="fas fa-volume-up"></i><span>Audio On</span>';
+                audioBtn.classList.add('playing');
+                console.log('🎵 Background audio autoplay successful');
+            }).catch(function(error) {
+                console.log('Background audio autoplay blocked:', error);
+                // Show button in muted state
+                audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i><span>Enable Audio</span>';
+            });
+        });
+        
+        console.log('🎵 Background audio initialized');
+    }
+}
+
+// Video intro functionality
+function initVideoIntro() {
+    const videoIntro = document.getElementById('videoIntro');
+    const introVideo = document.getElementById('introVideo');
+    const backgroundAudio = document.getElementById('backgroundAudio');
+    const loadingProgress = document.querySelector('.loading-progress');
+    
+    if (videoIntro && introVideo) {
+        let videoDuration = 0;
+        let currentTime = 0;
+        
+        // Get video duration when metadata is loaded
+        introVideo.addEventListener('loadedmetadata', function() {
+            videoDuration = introVideo.duration;
+            console.log('🎬 Video duration:', videoDuration, 'seconds');
+        });
+        
+        // Update loading bar based on video progress
+        introVideo.addEventListener('timeupdate', function() {
+            currentTime = introVideo.currentTime;
+            const progress = (currentTime / videoDuration) * 100;
+            if (loadingProgress) {
+                loadingProgress.style.width = progress + '%';
+            }
+        });
+        
+        // Handle video end
+        introVideo.addEventListener('ended', function() {
+            console.log('🎬 Video intro ended, transitioning to main site');
+            transitionToMainSite();
+        });
+        
+        // Start background audio when video starts
+        introVideo.addEventListener('play', function() {
+            console.log('🎬 Video started, starting background audio');
+            if (backgroundAudio) {
+                backgroundAudio.volume = 0.3;
+                backgroundAudio.loop = true;
+                backgroundAudio.play().then(() => {
+                    console.log('🎵 Background audio started with video');
+                }).catch(function(error) {
+                    console.log('Background audio failed to start:', error);
+                });
+            }
+        });
+        
+        // Fallback: if video doesn't autoplay, start after user interaction
+        document.addEventListener('click', function() {
+            if (introVideo.paused && videoIntro.style.display !== 'none') {
+                introVideo.play();
+            }
+        }, { once: true });
+        
+        console.log('🎬 Video intro initialized');
+    }
+}
+
+// Transition to main site
+function transitionToMainSite() {
+    const videoIntro = document.getElementById('videoIntro');
+    const audioBtn = document.getElementById('playAudioBtn');
+    
+    if (videoIntro) {
+        // Fade out video intro
+        videoIntro.classList.add('fade-out');
+        
+        // After fade animation, hide video intro
+        setTimeout(() => {
+            videoIntro.style.display = 'none';
+            
+            // Update audio button to show playing state
+            if (audioBtn) {
+                audioBtn.innerHTML = '<i class="fas fa-volume-up"></i><span>Audio On</span>';
+                audioBtn.classList.add('playing');
+            }
+            
+            console.log('🎬 Transition to main site complete');
+        }, 2000); // Match the CSS transition duration
+    }
+}
+
+// Initialize video intro
+initVideoIntro();
+
+// Initialize background audio
+initBackgroundAudio();
+
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
     const navTabs = document.querySelectorAll('.nav-tab');
@@ -312,3 +449,507 @@ const scrollToTop = () => {
         behavior: 'smooth'
     });
 }; 
+
+// Speech synthesis state
+let speechEnabled = true;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Function to list all available voices
+function listAvailableVoices() {
+    if ('speechSynthesis' in window) {
+        const voices = window.speechSynthesis.getVoices();
+        console.log('=== AVAILABLE VOICES ===');
+        voices.forEach((voice, index) => {
+            console.log(`${index + 1}. ${voice.name} (${voice.lang}) - ${voice.localService ? 'Local' : 'Remote'}`);
+        });
+        console.log('=== END VOICES ===');
+        return voices;
+    }
+    return [];
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // List available voices
+    listAvailableVoices();
+    
+    // Initialize clickable entries with typing effect
+    initClickableEntries();
+});
+
+// Clickable Entries with Typing Effect
+// Global variables for speech control
+let currentSpeechUtterance = null;
+let isCurrentlySpeaking = false;
+
+// Function to stop all speech
+function stopAllSpeech() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.pause();
+        window.speechSynthesis.resume();
+        
+        // Force stop by speaking and immediately cancelling a dummy utterance
+        const dummyUtterance = new SpeechSynthesisUtterance('');
+        window.speechSynthesis.speak(dummyUtterance);
+        window.speechSynthesis.cancel();
+        
+        console.log('🔇 ALL SPEECH STOPPED');
+    }
+    currentSpeechUtterance = null;
+    isCurrentlySpeaking = false;
+}
+
+function initClickableEntries() {
+    const clickableEntries = document.querySelectorAll('.clickable-entry');
+    
+    clickableEntries.forEach(entry => {
+        const header = entry.querySelector('.entry-header');
+        const content = entry.querySelector('.entry-content');
+        const typingText = entry.querySelector('.typing-text');
+        const clickIndicator = entry.querySelector('.click-indicator');
+        const fullContent = entry.getAttribute('data-content');
+        
+        if (!fullContent) return;
+        
+        // Initially hide content
+        content.style.display = 'none';
+        
+        // Add click event to the chevron specifically
+        clickIndicator.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent header click from firing
+            
+            const isExpanded = entry.classList.contains('expanded');
+            
+            if (!isExpanded) {
+                // Stop any existing speech first
+                stopAllSpeech();
+                
+                // Expand and start typing
+                entry.classList.add('expanded');
+                content.style.display = 'block';
+                
+                // Update chevron to point up
+                const chevron = clickIndicator.querySelector('i');
+                chevron.className = 'fas fa-chevron-up';
+                
+                // Only start typing if there's a typing-text element (chevron click)
+                if (typingText) {
+                    // Clear any existing text and cursor
+                    typingText.innerHTML = '';
+                    // Start typing effect
+                    typeText(typingText, fullContent);
+                    // Play typing sound
+                    playTypingSound();
+                } else {
+                    // For experience cards, create typing effect for bullet points
+                    const bulletsList = content.querySelector('.experience-bullets');
+                    if (bulletsList) {
+                        // Hide all bullet points initially (chevron click)
+                        const bullets = bulletsList.querySelectorAll('li');
+                        bullets.forEach(bullet => {
+                            bullet.style.opacity = '0';
+                        });
+                        
+                        // Type out bullet points one letter at a time with speech
+                        let bulletIndex = 0;
+                        let letterIndex = 0;
+                        let currentBullet = null;
+                        let originalText = '';
+                        let currentSpeechUtterance = null;
+                        
+                        const typeBulletPoints = () => {
+                            if (bulletIndex < bullets.length) {
+                                if (!currentBullet) {
+                                    // Start new bullet point
+                                    currentBullet = bullets[bulletIndex];
+                                    originalText = currentBullet.textContent;
+                                    currentBullet.textContent = '';
+                                    currentBullet.style.opacity = '1';
+                                    letterIndex = 0;
+                                    
+                                    // Start speaking this bullet point
+                                    if ('speechSynthesis' in window && speechEnabled) {
+                                        const speechSynth = window.speechSynthesis;
+                                        const speechUtterance = new SpeechSynthesisUtterance(originalText);
+                                        speechUtterance.rate = 0.5;
+                                        speechUtterance.pitch = 0.6;
+                                        speechUtterance.volume = 1.0;
+                                        
+                                        // Set voice
+                                        const voices = speechSynth.getVoices();
+                                        const trinoidsVoice = voices.find(voice => voice.name.includes('Trinoids'));
+                                        if (trinoidsVoice) {
+                                            speechUtterance.voice = trinoidsVoice;
+                                        }
+                                        
+                                        // Track speech
+                                        speechUtterance.onstart = () => {
+                                            isCurrentlySpeaking = true;
+                                            currentSpeechUtterance = speechUtterance;
+                                            console.log('🌿 Bullet point speech started:', originalText.substring(0, 50));
+                                        };
+                                        
+                                        speechUtterance.onend = () => {
+                                            isCurrentlySpeaking = false;
+                                            currentSpeechUtterance = null;
+                                            console.log('🌿 Bullet point speech ended');
+                                            
+                                            // Move to next bullet point after speech ends
+                                            bulletIndex++;
+                                            currentBullet = null;
+                                            if (bulletIndex < bullets.length) {
+                                                setTimeout(typeBulletPoints, 300); // Pause between bullet points
+                                            }
+                                        };
+                                        
+                                        speechSynth.speak(speechUtterance);
+                                    }
+                                }
+                                
+                                if (letterIndex < originalText.length) {
+                                    // Type next letter
+                                    currentBullet.textContent += originalText.charAt(letterIndex);
+                                    letterIndex++;
+                                    
+                                    // Play typing sound
+                                    playTypingSound();
+                                    
+                                    // Continue typing this bullet point
+                                    setTimeout(typeBulletPoints, 50); // Faster typing speed
+                                }
+                            }
+                        };
+                        
+                        // Start typing bullet points immediately
+                        setTimeout(typeBulletPoints, 200);
+                    }
+                }
+                
+            } else {
+                // Stop speech when collapsing (chevron click)
+                stopAllSpeech();
+                
+                // Collapse
+                entry.classList.remove('expanded');
+                content.style.display = 'none';
+                
+                // Update chevron to point down
+                const chevron = clickIndicator.querySelector('i');
+                chevron.className = 'fas fa-chevron-down';
+                
+                if (typingText) {
+                    typingText.innerHTML = '';
+                } else {
+                    // Reset bullet points opacity for experience cards
+                    const bulletsList = content.querySelector('.experience-bullets');
+                    if (bulletsList) {
+                        const bullets = bulletsList.querySelectorAll('li');
+                        bullets.forEach(bullet => {
+                            bullet.style.opacity = '0';
+                        });
+                    }
+                }
+            }
+        });
+        
+        // Keep the header click as a fallback
+        header.addEventListener('click', function(e) {
+            // Only trigger if chevron wasn't clicked
+            if (e.target.closest('.click-indicator')) return;
+            
+            const isExpanded = entry.classList.contains('expanded');
+            
+            if (!isExpanded) {
+                // Stop any existing speech first
+                stopAllSpeech();
+                
+                // Expand and start typing
+                entry.classList.add('expanded');
+                content.style.display = 'block';
+                
+                // Update chevron to point up
+                const chevron = clickIndicator.querySelector('i');
+                chevron.className = 'fas fa-chevron-up';
+                
+                // Only start typing if there's a typing-text element (header click)
+                if (typingText) {
+                    // Clear any existing text and cursor
+                    typingText.innerHTML = '';
+                    // Start typing effect
+                    typeText(typingText, fullContent);
+                    // Play typing sound
+                    playTypingSound();
+                } else {
+                    // For experience cards, create typing effect for bullet points
+                    const bulletsList = content.querySelector('.experience-bullets');
+                    if (bulletsList) {
+                        // Hide all bullet points initially (header click)
+                        const bullets = bulletsList.querySelectorAll('li');
+                        bullets.forEach(bullet => {
+                            bullet.style.opacity = '0';
+                        });
+                        
+                        // Type out bullet points one letter at a time with speech
+                        let bulletIndex = 0;
+                        let letterIndex = 0;
+                        let currentBullet = null;
+                        let originalText = '';
+                        let currentSpeechUtterance = null;
+                        
+                        const typeBulletPoints = () => {
+                            if (bulletIndex < bullets.length) {
+                                if (!currentBullet) {
+                                    // Start new bullet point
+                                    currentBullet = bullets[bulletIndex];
+                                    originalText = currentBullet.textContent;
+                                    currentBullet.textContent = '';
+                                    currentBullet.style.opacity = '1';
+                                    letterIndex = 0;
+                                    
+                                    // Start speaking this bullet point
+                                    if ('speechSynthesis' in window && speechEnabled) {
+                                        const speechSynth = window.speechSynthesis;
+                                        const speechUtterance = new SpeechSynthesisUtterance(originalText);
+                                        speechUtterance.rate = 0.5;
+                                        speechUtterance.pitch = 0.6;
+                                        speechUtterance.volume = 1.0;
+                                        
+                                        // Set voice
+                                        const voices = speechSynth.getVoices();
+                                        const trinoidsVoice = voices.find(voice => voice.name.includes('Trinoids'));
+                                        if (trinoidsVoice) {
+                                            speechUtterance.voice = trinoidsVoice;
+                                        }
+                                        
+                                        // Track speech
+                                        speechUtterance.onstart = () => {
+                                            isCurrentlySpeaking = true;
+                                            currentSpeechUtterance = speechUtterance;
+                                            console.log('🌿 Bullet point speech started:', originalText.substring(0, 50));
+                                        };
+                                        
+                                        speechUtterance.onend = () => {
+                                            isCurrentlySpeaking = false;
+                                            currentSpeechUtterance = null;
+                                            console.log('🌿 Bullet point speech ended');
+                                            
+                                            // Move to next bullet point after speech ends
+                                            bulletIndex++;
+                                            currentBullet = null;
+                                            if (bulletIndex < bullets.length) {
+                                                setTimeout(typeBulletPoints, 300); // Pause between bullet points
+                                            }
+                                        };
+                                        
+                                        speechSynth.speak(speechUtterance);
+                                    }
+                                }
+                                
+                                if (letterIndex < originalText.length) {
+                                    // Type next letter
+                                    currentBullet.textContent += originalText.charAt(letterIndex);
+                                    letterIndex++;
+                                    
+                                    // Play typing sound
+                                    playTypingSound();
+                                    
+                                    // Continue typing this bullet point
+                                    setTimeout(typeBulletPoints, 50); // Faster typing speed
+                                }
+                            }
+                        };
+                        
+                        // Start typing bullet points immediately
+                        setTimeout(typeBulletPoints, 200);
+                    }
+                }
+                
+            } else {
+                // Stop speech when collapsing (header click)
+                stopAllSpeech();
+                
+                // Collapse
+                entry.classList.remove('expanded');
+                content.style.display = 'none';
+                
+                // Update chevron to point down
+                const chevron = clickIndicator.querySelector('i');
+                chevron.className = 'fas fa-chevron-down';
+                
+                if (typingText) {
+                    typingText.innerHTML = '';
+                } else {
+                    // Reset bullet points opacity for experience cards
+                    const bulletsList = content.querySelector('.experience-bullets');
+                    if (bulletsList) {
+                        const bullets = bulletsList.querySelectorAll('li');
+                        bullets.forEach(bullet => {
+                            bullet.style.opacity = '0';
+                        });
+                    }
+                }
+            }
+        });
+    });
+}
+
+// Typing effect function with speech synthesis
+function typeText(element, text, speed = 80) { // Slower speed to match speech
+    let i = 0;
+    const cursor = document.createElement('span');
+    cursor.className = 'typing-cursor';
+    element.appendChild(cursor);
+    
+    // Initialize speech synthesis
+    let speechSynth = null;
+    let speechUtterance = null;
+    let speechStartTime = null;
+    let speechDuration = null;
+    
+    // Check if speech synthesis is available and enabled
+    if ('speechSynthesis' in window && speechEnabled) {
+        speechSynth = window.speechSynthesis;
+        
+        // Use natural Trinoids text - no artificial processing
+        let trinoidsText = text;
+        
+        // Create speech utterance with deeper voice and slower rate for dynamic adjustment
+        speechUtterance = new SpeechSynthesisUtterance(trinoidsText);
+        speechUtterance.rate = 0.5; // Even slower rate to give typing time to catch up
+        speechUtterance.pitch = 0.6; // Deeper voice (lower pitch)
+        speechUtterance.volume = 1.0; // Full volume
+        
+        console.log('🌿 DYNAMIC TRINOIDS VOICE CONFIGURED:', {
+            rate: speechUtterance.rate,
+            pitch: speechUtterance.pitch,
+            volume: speechUtterance.volume,
+            text: trinoidsText.substring(0, 100) + '...'
+        });
+        
+        // Wait for voices to load if needed
+        const setVoice = () => {
+            const voices = speechSynth.getVoices();
+            if (voices.length > 0) {
+                // Log all available voices for debugging
+                console.log('Available voices:', voices.map(v => `${v.name} (${v.lang})`));
+                
+                // Only use voices that include 'Trinoids' in the name
+                const trinoidsVoice = voices.find(voice => 
+                    voice.name.includes('Trinoids')
+                );
+                
+                if (trinoidsVoice) {
+                    speechUtterance.voice = trinoidsVoice;
+                    console.log('🌿 TRINOIDS VOICE SELECTED:', trinoidsVoice.name);
+                } else {
+                    console.log('🌿 No Trinoids voice found, using default');
+                }
+                
+                // Add dynamic Trinoids voice processing
+                speechUtterance.onstart = () => {
+                    isCurrentlySpeaking = true;
+                    currentSpeechUtterance = speechUtterance;
+                    speechStartTime = Date.now();
+                    console.log('🌿 DYNAMIC TRINOIDS VOICE STARTED - Natural organic active!');
+                    console.log('🌿 Voice settings:', {
+                        rate: speechUtterance.rate,
+                        pitch: speechUtterance.pitch,
+                        volume: speechUtterance.volume
+                    });
+                };
+                
+                speechUtterance.onend = () => {
+                    isCurrentlySpeaking = false;
+                    currentSpeechUtterance = null;
+                    speechDuration = Date.now() - speechStartTime;
+                    console.log('🌿 Speech duration:', speechDuration + 'ms');
+                };
+                
+                speechUtterance.onerror = () => {
+                    isCurrentlySpeaking = false;
+                    currentSpeechUtterance = null;
+                };
+                
+                // Start speech synthesis
+                speechSynth.speak(speechUtterance);
+            } else {
+                // If voices aren't loaded yet, try again in 100ms
+                setTimeout(setVoice, 100);
+            }
+        };
+        
+        setVoice();
+    }
+    
+    function type() {
+        if (i < text.length) {
+            element.insertBefore(document.createTextNode(text.charAt(i)), cursor);
+            i++;
+            
+            // Play typing sound for each character with variation
+            if (i % 2 === 0) { // Play sound every 2 characters for more realistic typing
+                playTypingSound();
+            }
+            
+            // Calculate dynamic speed based on speech progress
+            const progress = i / text.length;
+            const expectedTime = speechDuration ? (speechDuration * progress) : (80 * i);
+            const actualTime = Date.now() - speechStartTime;
+            
+            // Adjust typing speed to match speech timing - make typing faster to keep up
+            let typingSpeed = 80; // Faster default speed
+            if (speechDuration && speechStartTime) {
+                const timeDiff = expectedTime - actualTime;
+                if (timeDiff < -100) { // If typing is more than 100ms behind speech
+                    typingSpeed = 60; // Speed up typing significantly
+                    console.log('🚀 SPEEDING UP - Typing behind speech by', Math.abs(timeDiff), 'ms');
+                } else if (timeDiff > 100) { // If typing is more than 100ms ahead
+                    typingSpeed = 100; // Slow down typing
+                    console.log('🐌 SLOWING DOWN - Typing ahead of speech by', timeDiff, 'ms');
+                } else {
+                    typingSpeed = 80; // Normal speed
+                }
+                
+                // Log timing every 10 characters for debugging
+                if (i % 10 === 0) {
+                    console.log('⏱️ TIMING:', {
+                        progress: Math.round(progress * 100) + '%',
+                        expectedTime: Math.round(expectedTime),
+                        actualTime: Math.round(actualTime),
+                        timeDiff: Math.round(timeDiff),
+                        typingSpeed: typingSpeed
+                    });
+                }
+            }
+            
+            const speedVariation = typingSpeed + (Math.random() - 0.5) * 10; // Slightly more variation
+            setTimeout(type, speedVariation);
+        } else {
+            // Remove cursor when typing is complete
+            cursor.remove();
+            
+            // Don't stop speech - let it finish naturally
+            // This prevents the mid-speech stopping issue
+        }
+    }
+    
+    type();
+}
+
+// Simple typing sound effect (no audio processing)
+function playTypingSound() {
+    // Simple console log for typing sound (no audio processing)
+    console.log('⌨️ Typing sound played');
+} 

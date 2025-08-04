@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const particle = document.createElement('div');
         particle.style.cssText = `
             position: fixed;
-            width: 2px;
-            height: 2px;
+            width: 4px;
+            height: 4px;
             background: rgba(0, 212, 255, 0.6);
             border-radius: 50%;
             pointer-events: none;
